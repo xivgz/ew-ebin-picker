@@ -2,11 +2,14 @@ source of original code:
 https://github.com/antialiasis/favorite-picker
 
 # FAQ:
-\>Why am I here? I am not an ebin?\
-Post your character less\
+\>What is an ebin?\
+Ebic epin ebin posti \:DDD\
+\
+\>Why am I here?\
+Post your character less.\
 \
 \>Why am I not in this list?\
-Post your character more\
+Post your character more.\
 \
 \>There are multiple of the same person!\
 If someone posts as an alt or golem constantly, I keep it in because it's too bothersome to sort out.\
