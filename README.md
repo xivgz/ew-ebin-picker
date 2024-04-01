@@ -19,4 +19,7 @@ Just complain in a reply to the picker link that gets posted, be it by me or som
 \
 \>How do I check if I made the list?\
 You can check in the folders, or in the [tierlist](https://tierlists.com/create/zivg-endwalker-gamers).\
-The folders are sorted by race, sex, subrace only for Miqo, face \(If it is easy to tell, like Au Ra\), and lastly hair color. I chose hair color since people usually don't change it around, but there are exceptions of course, and those do not get put inside of the hair color folders. 
+The folders are sorted by race, sex, subrace only for Miqo, face \(If it is easy to tell, like Au Ra\), and lastly hair color. I chose hair color since people usually don't change it around, but there are exceptions of course, and those do not get put inside of the hair color folders.\
+\
+\>Remove me from the list!\
+You shouldn't have posted your character.
