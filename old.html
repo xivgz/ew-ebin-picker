@@ -224,26 +224,6 @@ button.disabled:hover {
 </div>
 
 <div id="secondary">
-<p>Filter by race:<br>
-<label>(<input type="checkbox" id="races-all"> Select all)</label>
-<label><input type="checkbox" name="races" class="races" value="au ra"> Au Ra</label>
-<label><input type="checkbox" name="races" class="races" value="elezen"> Elezen</label>
-<label><input type="checkbox" name="races" class="races" value="highlander"> Highlander</label>
-<label><input type="checkbox" name="races" class="races" value="hrothgar"> Hrothgar</label>
-<label><input type="checkbox" name="races" class="races" value="lala"> Lalafell</label>
-<br>
-<label><input type="checkbox" name="races" class="races" value="middie"> Midlander</label>
-<label><input type="checkbox" name="races" class="races" value="miqote"> Miqo'te</label>
-<label><input type="checkbox" name="races" class="races" value="roe"> Roegadyn</label>
-<label><input type="checkbox" name="races" class="races" value="viera"> Viera</label>
-<label><input type="checkbox" name="races" class="races" value="etc"> Other</label>
-</p>
-<p>Filter by sex:<br>
-<label><input type="checkbox" name="sexes" class="sexes" value="female"> Female</label>
-<label><input type="checkbox" name="sexes" class="sexes" value="male"> Male</label>
-<label><input type="checkbox" name="sexes" class="sexes" value="other"> Mental Illnesses</label></p>
-<p>Manual reset: <button id="reset">Reset</button>
-<span class="help-text">Resets all your progress. Careful!</span></p>
 <h2>Found favorites</h2>
 
 <ol id="favorites" class="item-list">
@@ -726,20 +706,12 @@ var items = [
 	{id: 'vimyb_3', image: './vi/m/yb/3.jpg', race: 'viera', sex: 'male'}
 ];
 
-var uirace = ["au ra", "elezen", "etc", "highlander", "hrothgar", "lala", "middie", "miqote", "roe", "viera"];
-
 var myPicker = new picker.Picker({
     items: items,
 	defaultSettings: {
-		minBatchSize: 3,
-        maxBatchSize: 20,
-		races: ['au ra', 'elezen', 'etc', 'highlander', 'hrothgar', 'lala', 'middie', 'miqote', 'roe', 'viera'],
-		sexes: ['female', 'male', 'other']
-    },
-	shouldIncludeItem: function(item, settings) {
-        // help
-		return settings.races.indexOf(item.race) !== -1 && settings.sexes.indexOf(item.sex) !== -1;
-	}
+        minBatchSize: 3,
+        maxBatchSize: 18
+    }
 });
 
 var pickerUI = new PickerUI(myPicker, {
@@ -749,18 +721,11 @@ var pickerUI = new PickerUI(myPicker, {
         undo: "#undo",
         redo: "#redo",
         evaluating: "#evaluating",
-        favorites: "#favorites",
-		settings: {
-			minBatchSize: '#min-batch-size',
-			maxBatchSize: '#max-batch-size',
-			races: '.races',
-			sexes: '.sexes'
-			}
+        favorites: "#favorites"
 		}
 });
 
 pickerUI.initialize();
-updateSelectAll(pickerUI.getSetting('races'), $("#races-all"), uirace);
 
 /* Sortable favorites - you can safely remove this, and the Sortable.min.js script, if you don't want to be able to sort your favorite list. */
 var sortable = new Sortable(pickerUI.elem.favorites.get(0), {
@@ -780,35 +745,6 @@ var sortable = new Sortable(pickerUI.elem.favorites.get(0), {
     }
 });
 /* End sortable favorites */
-
-/* Select-all filters, code from n8hynes favorite-picker */ 
-pickerUI.elem.settings.races.on('change', function() {
-    updateSelectAll(pickerUI.getSetting('races'), $("#races-all"), uirace);
-});
-
-function updateSelectAll(setting, allCheckbox, itemList) {
-    if (setting.length < itemList.length && setting.length > 0) {
-        allCheckbox.prop("indeterminate", true);
-    } else {
-        allCheckbox.prop("indeterminate", false);
-    }
-
-    if (setting.length === itemList.length) {
-        allCheckbox.prop("checked", true);
-    } else if (setting.length === 0) {
-        allCheckbox.prop("checked", false);
-    }
-}
-
-$("#races-all").on('change', function() {
-    pickerUI.setSetting('races', $(this).prop("checked") ? uirace : []);
-    myPicker.setSettings(pickerUI.getSettings());
-    pickerUI.update(true, 'setting');
-});
-
-/* Make reset button  */
-document.getElementById("reset").addEventListener("click", () => {pickerUI.reset()});
-
 </script>
 </body>
 </html>
