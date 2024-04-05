@@ -208,7 +208,7 @@ button.disabled:hover {
 <body>
 <h1>Endwalker Ebin Picker</h1>
 
-<p>At least it's not a Tier List. <a href="https://tierlists.com/create/zivg-endwalker-gamers">Except it is.</a> (not updated)</p>
+<p>Pick your favorite ebins from the batches presented to you, eventually your favorites will start to come out in order under "Found Favorites," if you are consistent. You can continue as long as you'd like. You are also able to reorder your favorites after they have been found.</p>
 <p>
 <a href="https://github.com/xivgz/ew-ebin-picker#faq">FAQ and Code</a> 
 <br>Last Picker Update: April 4th; 465 images total</p>
@@ -243,13 +243,14 @@ button.disabled:hover {
 <label><input type="checkbox" name="sexes" class="sexes" value="male"> Male</label>
 <label><input type="checkbox" name="sexes" class="sexes" value="other"> Other</label></p>
 <p>Manual reset: <button id="reset">Reset</button>
-<span class="help-text">Resets all your progress. Careful!</span></p>
+Resets all your progress.</p>
 <h2>Found favorites</h2>
 
 <ol id="favorites" class="item-list">
 </ol>
 </div>
 </div>
+<p style="font-size:70%;">At least it's not a Tier List. <a href="https://tierlists.com/create/zivg-endwalker-gamers">Except it is.</a> (not updated)</p>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="picker.js"></script>
 <script src="picker-ui.js"></script>
@@ -730,6 +731,7 @@ var uirace = ["au ra", "elezen", "etc", "highlander", "hrothgar", "lala", "middi
 
 var myPicker = new picker.Picker({
     items: items,
+	localStorageKey: 'picker-state',
 	defaultSettings: {
 		minBatchSize: 3,
         maxBatchSize: 20,
