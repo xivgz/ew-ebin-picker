@@ -14,7 +14,7 @@ Post your character more.\
 \>There are multiple of the same person!\
 If someone posts as an alt or golem constantly, I keep it in because it's too bothersome to sort out.\
 I will try to limit the alts and golems per subrace at least.\
-However, one-off golems like glamourer changes shouldn't be included.\
+However, one-off golems like glamourer changes to ebicly reply to anchorposts shouldn't be included.\
 If there is actually the same character, same eye color, same face shapes, do let me know.\
 \
 \>How do I let you know?\
