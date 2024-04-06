@@ -214,11 +214,10 @@ Those that get "eliminated" will show up again when the characters they have bee
 <br>Progress is saved when you close out of the page.</p>
 <p>
 <a href="https://github.com/xivgz/ew-ebin-picker#faq">FAQ and Code</a> 
-<br>Last Picker Update: April 4th; 467 images total</p>
+<br>Last Picker Update: April 4th; 466 images total</p>
 <hr> 
 
 <div id="container">
-
 <div id="picking">
 <ul id="evaluating" class="item-list">
 </ul>
@@ -245,8 +244,9 @@ Those that get "eliminated" will show up again when the characters they have bee
 <label><input type="checkbox" name="sexes" class="sexes" value="female"> Female</label>
 <label><input type="checkbox" name="sexes" class="sexes" value="male"> Male</label>
 <label><input type="checkbox" name="sexes" class="sexes" value="other"> Other</label></p>
-<p>Manual reset: <button id="reset">Reset</button>
-Resets all your progress.</p>
+<p>
+Manual reset: <button id="reset">Reset</button>
+Resets all your progress.<br>Ebins left remaining before next favorite is found: <span style="font-weight: bold" id="remaining"></span></p>
 <h2>Found favorites</h2>
 
 <ol id="favorites" class="item-list">
@@ -762,7 +762,16 @@ var pickerUI = new PickerUI(myPicker, {
 			races: '.races',
 			sexes: '.sexes'
 			}
-		}
+		},
+		/* Remaining counter */
+		    onUpdate: function(updateType) {
+        var totalEbins = this.picker.state.items.length;
+        var favorites = this.picker.state.arrays.favorites.length;
+        var eliminated = this.picker.state.arrays.eliminated.length;
+        var remaining = Math.max(0, totalEbins - favorites - eliminated - 1);
+
+        $("#remaining").text(remaining);
+		},
 });
 
 pickerUI.initialize();

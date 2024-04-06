@@ -208,10 +208,13 @@ button.disabled:hover {
 <body>
 <h1>Endwalker Ebin Picker</h1>
 
-<p>At least it's not a Tier List. <a href="https://tierlists.com/create/zivg-endwalker-gamers">Except it is.</a> (not updated)</p>
+<p>Pick your favorite ebins from the batches presented to you. Eventually your favorites will start to come out in order under "Found Favorites." You can continue for as long as you'd like. You are also able to reorder your favorites after they have been found.
+<br><br>The algorithm is elimination-style; the characters you pick will eliminate those you did not pick. So if you are stuck in a loop, you must pick fewer or stop passing. Passing is essentially the same as picking everyone in the batch.
+Those that get "eliminated" will show up again when the characters they have been eliminated by are on the found favorites list.
+<br>Progress is saved when you close out of the page.</p>
 <p>
 <a href="https://github.com/xivgz/ew-ebin-picker#faq">FAQ and Code</a> 
-<br>Last Picker Update: April 4th; 465 images total</p>
+<br>Last Picker Update: April 4th; 467 images total</p>
 <hr> 
 
 <div id="container">
@@ -224,12 +227,33 @@ button.disabled:hover {
 </div>
 
 <div id="secondary">
+<p>Filter by race:<br>
+<label>(<input type="checkbox" id="races-all"> Select all)</label>
+<label><input type="checkbox" name="races" class="races" value="au ra"> Au Ra</label>
+<label><input type="checkbox" name="races" class="races" value="elezen"> Elezen</label>
+<label><input type="checkbox" name="races" class="races" value="highlander"> Highlander</label>
+<label><input type="checkbox" name="races" class="races" value="hrothgar"> Hrothgar</label>
+<label><input type="checkbox" name="races" class="races" value="lala"> Lalafell</label>
+<br>
+<label><input type="checkbox" name="races" class="races" value="middie"> Midlander</label>
+<label><input type="checkbox" name="races" class="races" value="miqote"> Miqo'te</label>
+<label><input type="checkbox" name="races" class="races" value="roe"> Roegadyn</label>
+<label><input type="checkbox" name="races" class="races" value="viera"> Viera</label>
+<label><input type="checkbox" name="races" class="races" value="etc"> Other</label>
+</p>
+<p>Filter by gender:<br>
+<label><input type="checkbox" name="sexes" class="sexes" value="female"> Female</label>
+<label><input type="checkbox" name="sexes" class="sexes" value="male"> Male</label>
+<label><input type="checkbox" name="sexes" class="sexes" value="other"> Other</label></p>
+<p>Manual reset: <button id="reset">Reset</button>
+Resets all your progress.</p>
 <h2>Found favorites</h2>
 
 <ol id="favorites" class="item-list">
 </ol>
 </div>
 </div>
+<p style="font-size:70%;">At least it's not a Tier List. <a href="https://tierlists.com/create/zivg-endwalker-gamers">Except it is.</a> (never updated)</p>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="picker.js"></script>
 <script src="picker-ui.js"></script>
@@ -247,6 +271,7 @@ var items = [
 	{id: 'aufr1_6', image: './au/f/1r/1/6.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr1_7', image: './au/f/1r/1/7.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr1_8', image: './au/f/1r/1/8.jpg', race: 'au ra', sex: 'female'},
+	{id: 'aufr1_9', image: './au/f/1r/1/9.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr2_1', image: './au/f/1r/2/1.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr2_2', image: './au/f/1r/2/2.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr2_3', image: './au/f/1r/2/3.jpg', race: 'au ra', sex: 'female'},
@@ -706,12 +731,21 @@ var items = [
 	{id: 'vimyb_3', image: './vi/m/yb/3.jpg', race: 'viera', sex: 'male'}
 ];
 
+var uirace = ["au ra", "elezen", "etc", "highlander", "hrothgar", "lala", "middie", "miqote", "roe", "viera"];
+
 var myPicker = new picker.Picker({
     items: items,
+	localStorageKey: 'picker-state',
 	defaultSettings: {
-        minBatchSize: 3,
-        maxBatchSize: 18
-    }
+		minBatchSize: 3,
+        maxBatchSize: 20,
+		races: ['au ra', 'elezen', 'etc', 'highlander', 'hrothgar', 'lala', 'middie', 'miqote', 'roe', 'viera'],
+		sexes: ['female', 'male', 'other']
+    },
+	shouldIncludeItem: function(item, settings) {
+        // help
+		return settings.races.indexOf(item.race) !== -1 && settings.sexes.indexOf(item.sex) !== -1;
+	}
 });
 
 var pickerUI = new PickerUI(myPicker, {
@@ -721,11 +755,18 @@ var pickerUI = new PickerUI(myPicker, {
         undo: "#undo",
         redo: "#redo",
         evaluating: "#evaluating",
-        favorites: "#favorites"
+        favorites: "#favorites",
+		settings: {
+			minBatchSize: '#min-batch-size',
+			maxBatchSize: '#max-batch-size',
+			races: '.races',
+			sexes: '.sexes'
+			}
 		}
 });
 
 pickerUI.initialize();
+updateSelectAll(pickerUI.getSetting('races'), $("#races-all"), uirace);
 
 /* Sortable favorites - you can safely remove this, and the Sortable.min.js script, if you don't want to be able to sort your favorite list. */
 var sortable = new Sortable(pickerUI.elem.favorites.get(0), {
@@ -745,6 +786,35 @@ var sortable = new Sortable(pickerUI.elem.favorites.get(0), {
     }
 });
 /* End sortable favorites */
+
+/* Select-all filters, code from n8hynes favorite-picker */ 
+pickerUI.elem.settings.races.on('change', function() {
+    updateSelectAll(pickerUI.getSetting('races'), $("#races-all"), uirace);
+});
+
+function updateSelectAll(setting, allCheckbox, itemList) {
+    if (setting.length < itemList.length && setting.length > 0) {
+        allCheckbox.prop("indeterminate", true);
+    } else {
+        allCheckbox.prop("indeterminate", false);
+    }
+
+    if (setting.length === itemList.length) {
+        allCheckbox.prop("checked", true);
+    } else if (setting.length === 0) {
+        allCheckbox.prop("checked", false);
+    }
+}
+
+$("#races-all").on('change', function() {
+    pickerUI.setSetting('races', $(this).prop("checked") ? uirace : []);
+    myPicker.setSettings(pickerUI.getSettings());
+    pickerUI.update(true, 'setting');
+});
+
+/* Make reset button  */
+document.getElementById("reset").addEventListener("click", () => {pickerUI.reset()});
+
 </script>
 </body>
 </html>
