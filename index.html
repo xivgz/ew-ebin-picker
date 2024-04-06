@@ -219,14 +219,14 @@ Those that get "eliminated" will show up again when the characters they have bee
 
 <div id="container">
 <div id="picking">
-<ul id="evaluating" class="item-list">
+<ul id="evaluating" class="item-list" style="width: 800px">
 </ul>
 
 <p id="buttons"><button id="pick">Pick</button> <button id="pass">Pass</button> <button id="undo">Undo</button> <button id="redo">Redo</button></p>
 </div>
 
 <div id="secondary">
-<p>Filter by race:<br>
+<p><strong>Filter by race:</strong><br>
 <label>(<input type="checkbox" id="races-all"> Select all)</label>
 <label><input type="checkbox" name="races" class="races" value="au ra"> Au Ra</label>
 <label><input type="checkbox" name="races" class="races" value="elezen"> Elezen</label>
@@ -240,13 +240,13 @@ Those that get "eliminated" will show up again when the characters they have bee
 <label><input type="checkbox" name="races" class="races" value="viera"> Viera</label>
 <label><input type="checkbox" name="races" class="races" value="etc"> Other</label>
 </p>
-<p>Filter by gender:<br>
+<p><strong>Filter by gender:</strong><br>
 <label><input type="checkbox" name="sexes" class="sexes" value="female"> Female</label>
 <label><input type="checkbox" name="sexes" class="sexes" value="male"> Male</label>
 <label><input type="checkbox" name="sexes" class="sexes" value="other"> Other</label></p>
 <p>
-Manual reset: <button id="reset">Reset</button>
-Resets all your progress.<br>Ebins left remaining before next favorite is found: <span style="font-weight: bold" id="remaining"></span></p>
+<strong>Manual reset:</strong> <button id="reset">Reset</button>
+<br>Ebins remaining before next favorite is found: <span style="font-weight: bold" id="remaining"></span></p>
 <h2>Found favorites</h2>
 
 <ol id="favorites" class="item-list">
