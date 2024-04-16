@@ -212,13 +212,13 @@ button.disabled:hover {
 <body>
 <h1>Endwalker Ebin Picker</h1>
 
-<p>Pick your favorite characters from the batches presented to you. Eventually your favorites will start to come out in order under "Found Favorites." You can continue for as long as you'd like. You are also able to reorder your favorites after they have been found.
+<p>Pick your favorite characters from the batches presented to you. Eventually your favorite ebins will start to come out in order under "Found Favorites." You can continue for as long as you'd like. You are also able to reorder your favorites after they have been found.
 <br><br>The algorithm is elimination-style; the characters you pick will eliminate those you did not pick. So if you are stuck in a loop, you must pick fewer or stop passing. Passing is essentially the same as picking everyone in the batch.
 Those that get eliminated will show up again when the characters they have been eliminated by are on the found favorites list.
 <br><em>Progress is saved when you close out of the page.</em></p>
 <p>
 <a href="https://github.com/xivgz/ew-ebin-picker#faq">FAQ and Code</a> 
-<br>Last Picker Update: April 10</p>
+<br>Last Picker Update: April 15</p>
 <hr style="margin:0px"> 
 
 <div id="container">
@@ -250,7 +250,7 @@ Those that get eliminated will show up again when the characters they have been 
 <label><input type="checkbox" name="sexes" class="sexes" value="other"> Other</label></p>
 <p>
 <strong>Manual reset:</strong> <button id="reset">Reset</button>
-<br>Ebins remaining before next favorite is found: <span style="font-weight: bold" id="remaining"></span></p>
+<br>Characters remaining before next favorite ebin is found: <span style="font-weight: bold" id="remaining"></span></p>
 <h2>Found favorites</h2>
 
 <ol id="favorites" class="item-list">
@@ -276,6 +276,7 @@ var items = [
 	{id: 'aufr1_7', image: './au/f/1r/1/7.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr1_8', image: './au/f/1r/1/8.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr1_9', image: './au/f/1r/1/9.jpg', race: 'au ra', sex: 'female'},
+	{id: 'aufr1_10', image: './au/f/1r/1/10.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr2_1', image: './au/f/1r/2/1.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr2_2', image: './au/f/1r/2/2.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr2_3', image: './au/f/1r/2/3.jpg', race: 'au ra', sex: 'female'},
@@ -285,6 +286,7 @@ var items = [
 	{id: 'aufr2_7', image: './au/f/1r/2/7.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr2_8', image: './au/f/1r/2/8.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr2_9', image: './au/f/1r/2/9.jpg', race: 'au ra', sex: 'female'},
+	{id: 'aufr2_10', image: './au/f/1r/2/10.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr3_1', image: './au/f/1r/3/1.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr3_2', image: './au/f/1r/3/2.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr3_3', image: './au/f/1r/3/3.jpg', race: 'au ra', sex: 'female'},
@@ -293,6 +295,7 @@ var items = [
 	{id: 'aufr3_6', image: './au/f/1r/3/6.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr3_7', image: './au/f/1r/3/7.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr3_8', image: './au/f/1r/3/8.jpg', race: 'au ra', sex: 'female'},
+	{id: 'aufr3_9', image: './au/f/1r/3/9.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr4bk_1', image: './au/f/1r/4/bk/1.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr4bk_2', image: './au/f/1r/4/bk/2.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufr4bk_3', image: './au/f/1r/4/bk/3.jpg', race: 'au ra', sex: 'female'},
@@ -308,6 +311,7 @@ var items = [
 	{id: 'aufx1_2', image: './au/f/2x/1/2.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufx1_3', image: './au/f/2x/1/3.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufx1_4', image: './au/f/2x/1/4.jpg', race: 'au ra', sex: 'female'},
+	{id: 'aufx1_5', image: './au/f/2x/1/5.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufx2_1', image: './au/f/2x/2/1.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufx2_2', image: './au/f/2x/2/2.jpg', race: 'au ra', sex: 'female'},
 	{id: 'aufx2_3', image: './au/f/2x/2/3.jpg', race: 'au ra', sex: 'female'},
@@ -346,9 +350,11 @@ var items = [
 	{id: 'aumx1_2', image: './au/m/2x/1/2.jpg', race: 'au ra', sex: 'male'},
 	{id: 'aumx1_3', image: './au/m/2x/1/3.jpg', race: 'au ra', sex: 'male'},
 	{id: 'aumx1_4', image: './au/m/2x/1/4.jpg', race: 'au ra', sex: 'male'},
+	{id: 'aumx1_5', image: './au/m/2x/1/5.jpg', race: 'au ra', sex: 'male'},
 	{id: 'aumx2_1', image: './au/m/2x/2/1.jpg', race: 'au ra', sex: 'male'},
 	{id: 'aumx2_2', image: './au/m/2x/2/2.jpg', race: 'au ra', sex: 'male'},
 	{id: 'aumx2_3', image: './au/m/2x/2/3.jpg', race: 'au ra', sex: 'male'},
+	{id: 'aumx4_1', image: './au/m/2x/4/1.jpg', race: 'au ra', sex: 'male'},
 	{id: 'elfbk_1', image: './el/f/bk/1.jpg', race: 'elezen', sex: 'female'},
 	{id: 'elfbk_2', image: './el/f/bk/2.jpg', race: 'elezen', sex: 'female'},
 	{id: 'elfbk_3', image: './el/f/bk/3.jpg', race: 'elezen', sex: 'female'},
@@ -377,6 +383,7 @@ var items = [
 	{id: 'elmbk_1', image: './el/m/bk/1.jpg', race: 'elezen', sex: 'male'},
 	{id: 'elmbk_2', image: './el/m/bk/2.jpg', race: 'elezen', sex: 'male'},
 	{id: 'elmbk_3', image: './el/m/bk/3.jpg', race: 'elezen', sex: 'male'},
+	{id: 'elmbk_4', image: './el/m/bk/4.jpg', race: 'elezen', sex: 'male'},
 	{id: 'elmbp_1', image: './el/m/bp/1.jpg', race: 'elezen', sex: 'male'},
 	{id: 'elmob_1', image: './el/m/ob/1.jpg', race: 'elezen', sex: 'male'},
 	{id: 'elmob_2', image: './el/m/ob/2.jpg', race: 'elezen', sex: 'male'},
@@ -429,6 +436,7 @@ var items = [
 	{id: 'hr_11', image: './hr/11.jpg', race: 'hrothgar', sex: 'male'},
 	{id: 'hr_12', image: './hr/12.jpg', race: 'hrothgar', sex: 'male'},
 	{id: 'hr_13', image: './hr/13.jpg', race: 'hrothgar', sex: 'male'},
+	{id: 'hr_14', image: './hr/14.jpg', race: 'hrothgar', sex: 'male'},
 	{id: 'la_1', image: './la/1.jpg', race: 'lala', sex: 'other'},
 	{id: 'laf_1', image: './la/f/1.jpg', race: 'lala', sex: 'female'},
 	{id: 'laf_2', image: './la/f/2.jpg', race: 'lala', sex: 'female'},
@@ -556,6 +564,7 @@ var items = [
 	{id: 'mdm_1', image: './md/m/1.jpg', race: 'middie', sex: 'male'},
 	{id: 'mdm_2', image: './md/m/2.jpg', race: 'middie', sex: 'male'},
 	{id: 'mdm_3', image: './md/m/3.jpg', race: 'middie', sex: 'male'},
+	{id: 'mdm_4', image: './md/m/4.jpg', race: 'middie', sex: 'male'},
 	{id: 'mdmbk_1', image: './md/m/bk/1.jpg', race: 'middie', sex: 'male'},
 	{id: 'mdmbk_2', image: './md/m/bk/2.jpg', race: 'middie', sex: 'male'},
 	{id: 'mdmbk_3', image: './md/m/bk/3.jpg', race: 'middie', sex: 'male'},
@@ -579,6 +588,7 @@ var items = [
 	{id: 'mdmyb_3', image: './md/m/yb/3.jpg', race: 'middie', sex: 'male'},
 	{id: 'mq_1', image: './mq/1.jpg', race: 'miqote', sex: 'other'},
 	{id: 'mq_2', image: './mq/2.jpg', race: 'miqote', sex: 'other'},
+	{id: 'mq_3', image: './mq/3.jpg', race: 'miqote', sex: 'other'},
 	{id: 'mqf_1', image: './mq/f/1.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfm_1', image: './mq/f/1m/1.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfm_2', image: './mq/f/1m/2.jpg', race: 'miqote', sex: 'female'},
@@ -602,6 +612,7 @@ var items = [
 	{id: 'mqfmbk_13', image: './mq/f/1m/bk/13.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfmbk_14', image: './mq/f/1m/bk/14.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfmbk_15', image: './mq/f/1m/bk/15.jpg', race: 'miqote', sex: 'female'},
+	{id: 'mqfmbk_16', image: './mq/f/1m/bk/16.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfmbp_1', image: './mq/f/1m/bp/1.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfmbp_2', image: './mq/f/1m/bp/2.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfmbp_3', image: './mq/f/1m/bp/3.jpg', race: 'miqote', sex: 'female'},
@@ -629,7 +640,6 @@ var items = [
 	{id: 'mqfmyb_1', image: './mq/f/1m/yb/1.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfmyb_2', image: './mq/f/1m/yb/2.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfs_1', image: './mq/f/2s/1.jpg', race: 'miqote', sex: 'female'},
-	{id: 'mqfs_2', image: './mq/f/2s/2.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfs_3', image: './mq/f/2s/3.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfsbk_1', image: './mq/f/2s/bk/1.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfsbk_2', image: './mq/f/2s/bk/2.jpg', race: 'miqote', sex: 'female'},
@@ -660,6 +670,7 @@ var items = [
 	{id: 'mqfsrp_4', image: './mq/f/2s/rp/4.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfsrp_5', image: './mq/f/2s/rp/5.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfsrp_6', image: './mq/f/2s/rp/6.jpg', race: 'miqote', sex: 'female'},
+	{id: 'mqfsrp_7', image: './mq/f/2s/rp/7.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfswh_1', image: './mq/f/2s/wh/1.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfswh_2', image: './mq/f/2s/wh/2.jpg', race: 'miqote', sex: 'female'},
 	{id: 'mqfswh_3', image: './mq/f/2s/wh/3.jpg', race: 'miqote', sex: 'female'},
@@ -714,6 +725,7 @@ var items = [
 	{id: 'rom_5', image: './roe/m/5.jpg', race: 'roe', sex: 'male'},
 	{id: 'rom_6', image: './roe/m/6.jpg', race: 'roe', sex: 'male'},
 	{id: 'rom_7', image: './roe/m/7.jpg', race: 'roe', sex: 'male'},
+	{id: 'rom_8', image: './roe/m/8.jpg', race: 'roe', sex: 'male'},
 	{id: 'vi_1', image: './vi/1.jpg', race: 'viera', sex: 'other'},
 	{id: 'vif_1', image: './vi/f/1.jpg', race: 'viera', sex: 'female'},
 	{id: 'vif_2', image: './vi/f/2.jpg', race: 'viera', sex: 'female'},
