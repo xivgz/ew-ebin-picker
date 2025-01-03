@@ -24,4 +24,7 @@ Just complain in a reply to the picker link that gets posted, be it by me or som
 You can check in the folders. They're kind of sorted.\
 \
 \>Remove me from the list!\
-You shouldn't have posted your character.
+You shouldn't have posted your character.\
+\
+\>DT update when?!?!?!\
+soon :3
